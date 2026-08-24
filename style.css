@@ -6,21 +6,16 @@
   80%  { transform: translateX(4px); }
   100% { transform: translateX(0); }
 }
+
 .shake {
   animation: shake 0.4s ease;
 }
-
-.press-start-2p-regular {
-  font-family: "Press Start 2P", system-ui;
-  font-weight: 200;
-  font-style: normal;
-}
-
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
 @keyframes gradientMove {
@@ -41,59 +36,64 @@ body {
     align-items: center;
 }
 
+/* ── Calculadora ──────────────────────────────────────────── */
 .calculator {
-    background-color: #6a81c0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    padding: 28px;
     width: 450px;
 }
 
+/* ── Display — efeito tela LCD ────────────────────────────── */
 #display {
-    font-family: inherit;
-    background-color: #fff;
+    background-color: #1a2e1a;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.07) 0px,
+            rgba(0, 0, 0, 0.07) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+    color: #57f257;
+    text-shadow: 0 0 8px rgba(87, 242, 87, 0.7);
     border: none;
-    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    padding: 10px;
+    border-radius: 12px;
+    box-shadow:
+        inset 0 4px 12px rgba(0, 0, 0, 0.6),
+        0 0 0 2px rgba(87, 242, 87, 0.1);
+    padding: 14px 16px;
     width: 100%;
     font-size: 2.2em;
     text-align: right;
-    margin-bottom: 20px;
-    height: 80px;
+    margin-bottom: 16px;
+    height: 85px;
 }
 
+/* ── Grade de botões ──────────────────────────────────────── */
 .buttons {
-    background-color: #1c2e46;
-    border: none;
-    padding: 15px 20px;
-    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 16px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    justify-items: center;
-    margin: 5px;
-    border-radius: 5px;
 }
 
+/* ── Base dos botões ──────────────────────────────────────── */
 .btn {
-    font-family: inherit;
-    background-color: #4a91e200;
-    border: 1px solid #4a91e2;  
-    color: #4a91e2;
     width: 100%;
     margin: 0;
     aspect-ratio: 1/1;
     text-align: center;
-    text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    border-radius: 5px;
-    &:hover {
-        background-color: #4a91e2;
-        color: #fff;
-    }
-    transition: background-color 0.2s, transform 0.1s ease;
+    border-radius: 12px;
+    transition: background-color 0.15s ease, transform 0.1s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn:hover {
@@ -101,21 +101,73 @@ body {
 }
 
 .btn:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
 }
 
+/* ── Dígitos ──────────────────────────────────────────────── */
+.digit {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.digit:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Operadores ───────────────────────────────────────────── */
+.operator {
+    background: rgba(74, 145, 226, 0.12);
+    color: #6eb4ff;
+    border: 1px solid rgba(74, 145, 226, 0.3);
+}
+
+.operator:hover {
+    background: rgba(74, 145, 226, 0.28);
+    border-color: rgba(74, 145, 226, 0.6);
+    box-shadow: 0 0 12px rgba(74, 145, 226, 0.2);
+}
+
+/* ── AC e Backspace ───────────────────────────────────────── */
+.clear {
+    background: rgba(255, 107, 107, 0.12);
+    color: #ff8080;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.clear:hover {
+    background: rgba(255, 107, 107, 0.28);
+    border-color: rgba(255, 107, 107, 0.6);
+    box-shadow: 0 0 12px rgba(255, 107, 107, 0.2);
+}
+
+/* ── Botão = ──────────────────────────────────────────────── */
 .equals {
-    background-color: #4a91e2;
-    color: #fff;
+    background: linear-gradient(135deg, #4a91e2, #2563c4);
+    color: #ffffff;
     border: none;
     grid-column: 3 / span 2;
     aspect-ratio: 2/1;
+    box-shadow: 0 4px 15px rgba(74, 145, 226, 0.4);
 }
 
+.equals:hover {
+    background: linear-gradient(135deg, #5ba3f5, #3674d6);
+    box-shadow: 0 6px 20px rgba(74, 145, 226, 0.6);
+    transform: scale(1.03);
+}
+
+.equals:active {
+    transform: scale(0.97);
+}
+
+/* ── Mensagem de erro ─────────────────────────────────────── */
 .alerts {
     min-height: 1.2rem;
-    color: red;
-    font-size: 0.9em;
-    margin-top: 0px;
+    color: #ff8080;
+    font-size: 0.65em;
     text-align: center;
+    margin-bottom: 8px;
+    text-shadow: 0 0 6px rgba(255, 107, 107, 0.5);
 }
