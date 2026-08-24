@@ -38,7 +38,7 @@ function operate(operator, a, b) {
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("digit")) {
     if (operator === "") {
-      if (firstNumber.length >= 12) {
+      if (firstNumber.length >= 10) {
         alerts.textContent = "Maximum digits reached";
         display.classList.add("shake");
         setTimeout(() => {
@@ -50,7 +50,7 @@ document.addEventListener("click", (e) => {
       firstNumber += e.target.textContent;
       display.value = firstNumber;
     } else {
-      if (secondNumber.length >= 12) {
+      if (secondNumber.length >= 10) {
         alerts.textContent = "Maximum digits reached";
         display.classList.add("shake");
         setTimeout(() => {
@@ -74,7 +74,7 @@ document.addEventListener("click", (e) => {
       secondNumber = '';
     }
     operator = e.target.textContent;
-    // display.value = operator;
+    display.value = operator;
   }
 
   else if (e.target.id === "equals") {
