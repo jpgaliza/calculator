@@ -62,6 +62,37 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// ── Suporte ao teclado ────────────────────────────────────────────────────────
+document.addEventListener('keydown', (e) => {
+  const key = e.key;
+
+  // Dígitos 0–9
+  if (key >= '0' && key <= '9') {
+    document.querySelector(`[data-value="${key}"]`)?.click();
+
+  // Operadores
+  } else if (key === '+') {
+    document.querySelector('#btn-add').click();
+  } else if (key === '-') {
+    document.querySelector('#btn-sub').click();
+  } else if (key === '*') {
+    document.querySelector('#btn-mul').click();
+  } else if (key === '/') {
+    e.preventDefault(); // evita o Quick Find do browser
+    document.querySelector('#btn-div').click();
+
+  // Ações
+  } else if (key === 'Enter') {
+    e.preventDefault();
+    document.querySelector('#equals').click();
+  } else if (key === 'Backspace') {
+    e.preventDefault(); // evita navegar para a página anterior
+    document.querySelector('#backspace').click();
+  } else if (key === 'c' || key === 'C') {
+    document.querySelector('#clear').click();
+  }
+});
+
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("operator")) {
     if (secondNumber !== '') {
