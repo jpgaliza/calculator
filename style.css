@@ -108,6 +108,8 @@ body {
     background-color: #4a91e2;
     color: #fff;
     border: none;
+    grid-column: 3 / span 2;
+    aspect-ratio: 2/1;
 }
 
 .alerts {

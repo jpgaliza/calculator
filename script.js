@@ -16,10 +16,7 @@ const alerts = document.querySelector("#alerts");
 
 function operate(operator, a, b) {
   if (operator === '+') {
-    const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
-    const rounded = parseFloat(result.toFixed(10));
-    display.value = rounded;
-    firstNumber = rounded.toString();
+    return add(a, b)
   }
 
   else if (operator === '-') {
@@ -68,17 +65,19 @@ document.addEventListener("click", (e) => {
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("operator")) {
     if (secondNumber !== '') {
-      const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+      const raw = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+      const result = typeof raw === 'number' ? parseFloat(raw.toFixed(10)) : raw;
       display.value = result;
       firstNumber = result.toString();
       secondNumber = '';
     }
-    operator = e.target.textContent;
-    display.value = operator;
+    operator = e.target.dataset.value;
+    display.value = e.target.textContent;
   }
 
   else if (e.target.id === "equals") {
-    const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+    const raw = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+    const result = typeof raw === 'number' ? parseFloat(raw.toFixed(10)) : raw;
     display.value = result;
     firstNumber = result.toString();
     secondNumber = '';
@@ -90,5 +89,15 @@ document.addEventListener("click", (e) => {
     secondNumber = '';
     operator = '';
     display.value = '';
+  }
+
+  else if (e.target.id === "backspace") {
+    if (operator === '') {
+      firstNumber = firstNumber.slice(0, -1);
+      display.value = firstNumber;
+    } else {
+      secondNumber = secondNumber.slice(0, -1);
+      display.value = secondNumber;
+    }
   }
 });
